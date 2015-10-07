@@ -1,7 +1,9 @@
+PImage cola;
+PImage umaru;
 NormalParticle[] particles;
 void setup()
 {
-	size(400,400);
+		size(440,440);
 	frameRate(20);
 	particles = new NormalParticle[100];
 	for(int i = 0; i < particles.length; i++)
@@ -10,6 +12,9 @@ void setup()
     }
     particles[0] = new OddballParticle();
     particles[1] = new JumboParticle();
+    cola = loadImage("cola.png");
+    umaru = loadImage("http://biginjap.com/59850-thickbox_default/himouto-umaru-chan-roughly-life-size-cushion.jpg");
+
 }
 
 interface particles
@@ -20,8 +25,8 @@ interface particles
 
 void draw()
 {
-	background(0);
-	
+	background(255);
+	image(umaru, -80, -60, 600, 600);
     for(int j = 0; j < particles.length; j++)
     {
     	particles[j].show();
@@ -42,8 +47,8 @@ class NormalParticle implements particles
        dy = 200;
        theSpeed = Math.random()*10;
        theAngle = (Math.random()*(2*Math.PI));
-       sizeX = 20;
-       sizeY = 20;
+       sizeX = 10;
+       sizeY = 10;
 	}
 	void move()
 	{
@@ -54,7 +59,8 @@ class NormalParticle implements particles
 	{
       fill(r,g,b);
       noStroke();
-      ellipse((float)dx,(float)dy, sizeX,sizeY);
+      // ellipse((float)dx,(float)dy, sizeX,sizeY);
+      image(cola, (float)dx, (float)dy, 23,42);
 	}
 }
 
@@ -73,13 +79,17 @@ class OddballParticle extends NormalParticle
       dx = dx + (int)(Math.random()*2)-4;
       dy = dy + (int)(Math.random()*2)-4;
 	}
+	// public void show()
+	// {
+		
+	// }
 }
 
 class JumboParticle extends NormalParticle
 {
   JumboParticle()
   {
-    sizeX = 60;
-    sizeY = 60;
+    sizeX = 50;
+    sizeY = 50;
   }
 }
