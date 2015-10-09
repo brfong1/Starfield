@@ -17,7 +17,10 @@ void setup()
   umaru = loadImage("http://biginjap.com/59850-thickbox_default/himouto-umaru-chan-roughly-life-size-cushion.jpg");
   potato = loadImage("potato.png");
 }
-
+void mouseClicked()
+{
+  setup();
+}
 interface particles
 {
   public void move();
@@ -51,8 +54,8 @@ class NormalParticle implements particles
     dy = 200;
     theSpeed = Math.random()*5;
     theAngle = (Math.random()*(2*Math.PI));
-    sizeX = 10;
-    sizeY = 10;
+    sizeX = 23;
+    sizeY = 42;
   }
   void move()
   {
@@ -64,7 +67,15 @@ class NormalParticle implements particles
     fill(r, g, b);
     noStroke();
     // ellipse((float)dx,(float)dy, sizeX,sizeY);
-    image(cola, (float)dx, (float)dy, 23, 42);
+    image(cola, (float)dx, (float)dy, sizeX, sizeY);
+  }
+  void wrap()
+  {
+    if (dx > 440 || dx < 0 || dy > 440 || dy < 0)
+    {
+      dx = 220;
+      dy = 220;
+    }
   }
 }
 
@@ -72,38 +83,60 @@ class OddballParticle extends NormalParticle
 {
   OddballParticle()
   {
-    dx = Math.random()*200;
-    dy = Math.random()*200;
+    dx = (Math.random()*400)+20;
+    dy = (Math.random()*400)+20;
     r = 255;
     b = 255;
-    g = 255;
-    theSpeed = 1;
+    g = 255;   
     up = true;
     left = true;
   }
   public void move()
   {
-    if (up)
+    theSpeed = Math.random()*5;
+    theAngle = (Math.random()*(2*Math.PI)); 
+    if (up) 
+    {
       dy-=10;
-    else
+      // dy = dy + Math.sin(theAngle)*theSpeed;
+    } else
+    {
       dy+=10;
+      // dy = dy + Math.sin(theAngle)*theSpeed;
+    }
     if (left)
+    {
       dx-=10;
-    else
+      // dx = dx + Math.cos(theAngle)*theSpeed;
+    } else
+    {
       dx+=10;
-    if (dx <= 0 || dx + 51 >= 440)
+      // dx = dx + Math.cos(theAngle)*theSpeed;
+    }
+    if (dx - 1 <= 0 || dx + 51 >= 440)
     {
       left =! left;
     }
-    if (dy < 0 || dy + 65 > 440)
+    if (dy - 1 < 0 || dy + 65 > 440)
     {
       up =! up;
     }
-   }
-    
+  }
+
   public void show()
   {
     image(potato, (float)dx, (float)dy, 50, 68);
+  }
+  public void wrap()
+  {
+    if (dx - 1 <= 0 || dx + 51 >= 440)
+    {
+      left =! left;
+    }
+    if (dy - 1 < 0 || dy + 65 > 440)
+    {
+      up =! up;
+    }
   }
 }
 
