@@ -25,6 +25,7 @@ interface particles
 {
   public void move();
   public void show();
+  public void wrap();
 }
 
 void draw()
@@ -52,29 +53,34 @@ class NormalParticle implements particles
     b = (int)(Math.random()*255);
     dx = 200;
     dy = 200;
-    theSpeed = Math.random()*5;
+    theSpeed = Math.random()*50;
     theAngle = (Math.random()*(2*Math.PI));
     sizeX = 23;
     sizeY = 42;
   }
-  void move()
+  public void move()
   {
-    dx = dx + Math.cos(theAngle)*theSpeed;
-    dy = dy + Math.sin(theAngle)*theSpeed;
+    dx = dx + (Math.cos(theAngle))*theSpeed;
+    dy = dy + (Math.sin(theAngle))*theSpeed;
   }
-  void show()
+  public void show()
   {
     fill(r, g, b);
     noStroke();
-    // ellipse((float)dx,(float)dy, sizeX,sizeY);
+    // ellipse((float)dx,(float)dy, 20,20);
     image(cola, (float)dx, (float)dy, sizeX, sizeY);
   }
-  void wrap()
+  public void wrap()
   {
     if (dx > 440 || dx < 0 || dy > 440 || dy < 0)
     {
       dx = 220;
       dy = 220;
+      System.out.println("no");
+      theSpeed = Math.random()*50;
+      theAngle = (Math.random()*(2*Math.PI));
+      sizeX = 23;
+      sizeY = 42;
     }
   }
 }
@@ -144,7 +150,7 @@ class JumboParticle extends NormalParticle
 {
   JumboParticle()
   {
-    sizeX = 50;
-    sizeY = 50;
+    sizeX = 46;
+    sizeY = 84;
   }
 }
