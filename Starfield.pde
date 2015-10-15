@@ -4,7 +4,7 @@ PImage potato;
 NormalParticle[] particles;
 void setup()
 {
-  size(440, 440);
+  size(750, 420);
   frameRate(20);
   particles = new NormalParticle[100];
   for (int i = 0; i < particles.length; i++)
@@ -14,7 +14,7 @@ void setup()
   particles[0] = new OddballParticle();
   particles[1] = new JumboParticle();
   cola = loadImage("cola.png");
-  umaru = loadImage("http://biginjap.com/59850-thickbox_default/himouto-umaru-chan-roughly-life-size-cushion.jpg");
+  umaru = loadImage("umaru_cola.png");
   potato = loadImage("potato.png");
 }
 void mouseClicked()
@@ -31,13 +31,13 @@ interface particles
 void draw()
 {
   background(255);
-  image(umaru, -80, -60, 600, 600);
+  image(umaru, 0, 0, 750, 420);
   fill(255);
-  rect(0, 0, 500, 45);
   for (int j = 0; j < particles.length; j++)
   {
     particles[j].show();
     particles[j].move();
+    particles[j].wrap();
   }
 }
 
@@ -51,12 +51,15 @@ class NormalParticle implements particles
     r = (int)(Math.random()*255);
     g = (int)(Math.random()*255);
     b = (int)(Math.random()*255);
-    dx = 200;
-    dy = 200;
-    theSpeed = Math.random()*50;
+    // dx = (int)((Math.random()*20) + 330);
+    // dy = (int)((Math.random()*20) + 50);
+    dx = 330;
+    dy = 70;
+    // theSpeed = Math.random()*50;
+    theSpeed = 50;
     theAngle = (Math.random()*(2*Math.PI));
-    sizeX = 23;
-    sizeY = 42;
+    sizeX = 46;
+    sizeY = 84;
   }
   public void move()
   {
@@ -72,16 +75,19 @@ class NormalParticle implements particles
   }
   public void wrap()
   {
-    if (dx > 440 || dx < 0 || dy > 440 || dy < 0)
+    if ((dx > 510 || dx < 0) && (dy > 510 || dy < 0))
     {
-      dx = 220;
-      dy = 220;
-      System.out.println("no");
-      theSpeed = Math.random()*50;
+      dx = (int)((Math.random()*20) + 330);
+      dy = (int)((Math.random()*20) + 50);
+      dx = 330;
+      dy = 70;
+      // theSpeed = Math.random()*50;
       theAngle = (Math.random()*(2*Math.PI));
-      sizeX = 23;
-      sizeY = 42;
+      sizeX = 46;
+      sizeY = 84;
     }
+    // dx = dx + (Math.cos(theAngle))*theSpeed;
+    // dy = dy + (Math.sin(theAngle))*theSpeed;
   }
 }
 
@@ -119,11 +125,19 @@ class OddballParticle extends NormalParticle
       dx+=10;
       // dx = dx + Math.cos(theAngle)*theSpeed;
     }
-    if (dx - 1 <= 0 || dx + 51 >= 440)
+    if (dx - 1 <= 0 || dx + 51 >= 750)
     {
       left =! left;
     }
-    if (dy - 1 < 0 || dy + 65 > 440)
+    if (dy - 1 < 0 || dy + 65 > 750)
+    {
+      up =! up;
+    }
+    if (dx - 1 <= 0 || dx + 51 >= 750)
+    {
+      left =! left;
+    }
+    if (dy - 1 < 0 || dy + 65 > 750)
     {
       up =! up;
     }
@@ -131,15 +145,15 @@ class OddballParticle extends NormalParticle
 
   public void show()
   {
-    image(potato, (float)dx, (float)dy, 50, 68);
+    image(potato, (float)dx, (float)dy, 75, 102);
   }
   public void wrap()
   {
-    if (dx - 1 <= 0 || dx + 51 >= 440)
+    if (dx - 1 <= 0 || dx + 51 >= 750)
     {
       left =! left;
     }
-    if (dy - 1 < 0 || dy + 65 > 440)
+    if (dy - 1 < 0 || dy + 65 > 750)
     {
       up =! up;
     }
