@@ -166,7 +166,7 @@ class SmallParticle extends NormalParticle
 {
   SmallParticle()
   {
-    sizeX = 46;
-    sizeY = 84;
+    sizeX = 23;
+    sizeY = 42;
   }
 }
