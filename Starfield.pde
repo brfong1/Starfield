@@ -6,13 +6,13 @@ void setup()
 {
   size(750, 420);
   frameRate(20);
-  particles = new NormalParticle[100];
+  particles = new NormalParticle[50];
   for (int i = 0; i < particles.length; i++)
   {
     particles[i] = new NormalParticle();
   }
   particles[0] = new OddballParticle();
-  particles[1] = new JumboParticle();
+  particles[1] = new SmallParticle();
   cola = loadImage("cola.png");
   umaru = loadImage("umaru_cola.png");
   potato = loadImage("potato.png");
@@ -44,7 +44,7 @@ void draw()
 class NormalParticle implements particles
 {
   double dx, dy, theAngle, theSpeed;
-  int r, g, b, sizeX, sizeY;
+  int r, g, b, sizeX, sizeY, centerX, centerY;
   boolean up, left;
   NormalParticle()
   {
@@ -53,13 +53,15 @@ class NormalParticle implements particles
     b = (int)(Math.random()*255);
     // dx = (int)((Math.random()*20) + 330);
     // dy = (int)((Math.random()*20) + 50);
-    dx = 330;
-    dy = 70;
+    dx = 500;
+    dy = 100;
     // theSpeed = Math.random()*50;
-    theSpeed = 50;
+    theSpeed = 30;
     theAngle = (Math.random()*(2*Math.PI));
     sizeX = 46;
     sizeY = 84;
+    centerX = 470;
+    centerY = 90;
   }
   public void move()
   {
@@ -75,16 +77,16 @@ class NormalParticle implements particles
   }
   public void wrap()
   {
-    if ((dx > 510 || dx < 0) && (dy > 510 || dy < 0))
+    if ((dx > 750 || dx < 0) && (dy > 750 || dy < 0))
     {
-      dx = (int)((Math.random()*20) + 330);
-      dy = (int)((Math.random()*20) + 50);
-      dx = 330;
-      dy = 70;
+      dx = (int)((Math.random()*20) + centerX);
+      dy = (int)((Math.random()*20) + centerY);
+      dx = centerX;
+      dy = centerY;
       // theSpeed = Math.random()*50;
       theAngle = (Math.random()*(2*Math.PI));
-      sizeX = 46;
-      sizeY = 84;
+      sizeX = 92;
+      sizeY = 168;
     }
     // dx = dx + (Math.cos(theAngle))*theSpeed;
     // dy = dy + (Math.sin(theAngle))*theSpeed;
@@ -129,7 +131,7 @@ class OddballParticle extends NormalParticle
     {
       left =! left;
     }
-    if (dy - 1 < 0 || dy + 65 > 750)
+    if (dy - 1 < 0 || dy + 65 > 420)
     {
       up =! up;
     }
@@ -137,7 +139,7 @@ class OddballParticle extends NormalParticle
     {
       left =! left;
     }
-    if (dy - 1 < 0 || dy + 65 > 750)
+    if (dy - 1 < 0 || dy + 65 > 420)
     {
       up =! up;
     }
@@ -160,9 +162,9 @@ class OddballParticle extends NormalParticle
   }
 }
 
-class JumboParticle extends NormalParticle
+class SmallParticle extends NormalParticle
 {
-  JumboParticle()
+  SmallParticle()
   {
     sizeX = 46;
     sizeY = 84;
