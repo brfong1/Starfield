@@ -151,11 +151,11 @@ class OddballParticle extends NormalParticle
   }
   public void wrap()
   {
-    if (dx - 1 <= 0 || dx + 51 >= 750)
+    if (dx - 1 <= 0 || dx + 60 >= 750)
     {
       left =! left;
     }
-    if (dy - 1 < 0 || dy + 65 > 750)
+    if (dy - 1 < 0 || dy + 80 > 420)
     {
       up =! up;
     }
