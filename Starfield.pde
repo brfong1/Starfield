@@ -12,7 +12,7 @@ void setup()
     particles[i] = new NormalParticle();
   }
   particles[0] = new OddballParticle();
-  particles[1] = new SmallParticle();
+  particles[1] = new JumboParticle();
   cola = loadImage("cola.png");
   umaru = loadImage("umaru_cola.png");
   potato = loadImage("potato.png");
@@ -162,11 +162,11 @@ class OddballParticle extends NormalParticle
   }
 }
 
-class SmallParticle extends NormalParticle
+class JumboParticle extends NormalParticle
 {
-  SmallParticle()
+  JumboParticle()
   {
-    sizeX = 23;
-    sizeY = 42;
+    sizeX = 138;
+    sizeY = 252;
   }
 }
